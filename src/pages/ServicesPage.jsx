@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
-import { Container, Accordion, ButtonGroup, Button } from 'react-bootstrap';
-import ServiceDetail from '../components/ServiceDetail';
+import { Container, Accordion, ButtonGroup, Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import ServiceDetail from '../components/ServiceDetail';
+import { FaHome, FaBuilding, FaTools, FaRoad } from 'react-icons/fa';
+import SectionHeader from "../components/SectionHeader";
 
-const FilterContainer = styled.div`
-  margin-bottom: 2rem;
-  text-align: center;
+const ServicesContainer = styled.div`
+  padding: 5rem 0;
   
   .filter-btn {
     margin: 0 0.5rem 1rem;
     background-color: ${({ theme }) => theme.colors.primary || '#000000'};
     color: ${({ theme }) => theme.colors.secondary || '#FFFFFF'};
-    border: 1px solid ${({ theme }) => theme.colors.accent || '#FFD700'};
+    border: 2px solid ${({ theme }) => theme.colors.primary || '#000000'};
+    font-weight: 600;
     
     &:hover, &.active {
       background-color: ${({ theme }) => theme.colors.accent || '#FFD700'};
       color: ${({ theme }) => theme.colors.primary || '#000000'};
       border-color: ${({ theme }) => theme.colors.accent || '#FFD700'};
     }
+  }
+  
+  .service-icon {
+    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.accent || '#FFD700'};
+    margin-right: 1rem;
   }
 `;
 
@@ -36,7 +44,7 @@ const ServicesPage = () => {
         "Structural renovations"
       ],
       type: "residential",
-      image: "/images/residential.jpg"
+      icon: <FaHome />
     },
     {
       id: 2,
@@ -49,9 +57,9 @@ const ServicesPage = () => {
         "Mixed-use developments"
       ],
       type: "commercial",
-      image: "/images/commercial.jpg"
+      icon: <FaBuilding />
     },
-    // Add more services with types...
+    // Add more services...
   ];
 
   const serviceTypes = [
@@ -59,7 +67,7 @@ const ServicesPage = () => {
     { id: 'residential', label: 'Residential' },
     { id: 'commercial', label: 'Commercial' },
     { id: 'renovation', label: 'Renovations' },
-    // Add more types as needed
+    { id: 'civil', label: 'Civil Works' }
   ];
 
   const filteredServices = activeFilter === 'all' 
@@ -67,33 +75,48 @@ const ServicesPage = () => {
     : services.filter(service => service.type === activeFilter);
 
   return (
-    <Container className="py-5">
-      <h1 className="text-center mb-4">Our Construction Services</h1>
-      
-      <FilterContainer>
-        <ButtonGroup>
-          {serviceTypes.map((type) => (
-            <Button
-              key={type.id}
-              className={`filter-btn ${activeFilter === type.id ? 'active' : ''}`}
-              onClick={() => setActiveFilter(type.id)}
-            >
-              {type.label}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </FilterContainer>
+    <ServicesContainer>
+      <Container>
+        <SectionHeader
+          title="Our Construction Services"
+          subtitle="Comprehensive solutions for all your building needs"
+        />
 
-      <Accordion defaultActiveKey="0">
-        {filteredServices.map((service, index) => (
-          <ServiceDetail 
-            key={service.id}
-            service={service}
-            eventKey={index.toString()}
-          />
-        ))}
-      </Accordion>
-    </Container>
+        <div className="text-center mb-5">
+          <ButtonGroup>
+            {serviceTypes.map((type) => (
+              <Button
+                key={type.id}
+                className={`filter-btn ${activeFilter === type.id ? 'active' : ''}`}
+                onClick={() => setActiveFilter(type.id)}
+              >
+                {type.label}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </div>
+
+        <Row>
+          <Col lg={8} className="mx-auto">
+            <Accordion defaultActiveKey="0">
+              {filteredServices.map((service, index) => (
+                <ServiceDetail 
+                  key={service.id}
+                  service={service}
+                  eventKey={index.toString()}
+                />
+              ))}
+            </Accordion>
+          </Col>
+        </Row>
+
+        <div className="text-center mt-5">
+          <Button variant="primary" size="lg">
+            Get a Free Quote
+          </Button>
+        </div>
+      </Container>
+    </ServicesContainer>
   );
 };
 
