@@ -1,4 +1,3 @@
-// src/pages/ContactPage.js
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -89,10 +88,10 @@ const ContactPage = () => {
     
     try {
       await emailjs.send(
-        'your_service_id',
-        'your_template_id',
+        'service_your_service_id', // Replace with your EmailJS service ID
+        'template_your_template_id', // Replace with your EmailJS template ID
         formData,
-        'your_user_id'
+        'your_user_id' // Replace with your EmailJS user ID
       );
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });

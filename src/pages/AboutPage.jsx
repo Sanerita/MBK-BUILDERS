@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Row, Col, Tab, Tabs, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Tab, Tabs, Badge, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-// import teamImage from "../assets/team.jpg";
+import teamImage from "../assets/team.jpg";
 import SectionHeader from '../components/SectionHeader';
 import { FaHardHat, FaUsers, FaShieldAlt, FaLightbulb } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const AboutContainer = styled.div`
   padding: 5rem 0;
@@ -89,6 +90,8 @@ const AboutContainer = styled.div`
 `;
 
 const AboutPage = () => {
+  const navigate = useNavigate();
+
   return (
     <AboutContainer>
       <Container>
@@ -98,9 +101,9 @@ const AboutPage = () => {
         />
 
         <Row className="align-items-center mb-5">
-          {/* <Col md={6}>
+          <Col md={6}>
             <img src={teamImage} alt="MBK Builders Team" className="img-fluid rounded shadow" />
-          </Col> */}
+          </Col>
           <Col md={6}>
             <h3 className="mb-4">Our Story</h3>
             <p className="mb-4">Founded in 2023 in Butterworth, MBK Builders has quickly established itself as a trusted name in Eastern Cape construction, delivering quality projects with precision and care.</p>
@@ -189,6 +192,12 @@ const AboutPage = () => {
             </div>
           </Col>
         </Row>
+
+        <div className="text-center mt-5">
+          <Button variant="primary" size="lg" onClick={() => navigate('/contact')}>
+            Get in Touch With Us
+          </Button>
+        </div>
       </Container>
     </AboutContainer>
   );

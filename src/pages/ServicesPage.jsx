@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ServiceDetail from '../components/ServiceDetail';
 import { FaHome, FaBuilding, FaTools, FaRoad } from 'react-icons/fa';
 import SectionHeader from "../components/SectionHeader";
+import { useNavigate } from 'react-router-dom';
 
 const ServicesContainer = styled.div`
   padding: 5rem 0;
@@ -31,6 +32,7 @@ const ServicesContainer = styled.div`
 
 const ServicesPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const navigate = useNavigate();
   
   const services = [
     {
@@ -59,7 +61,32 @@ const ServicesPage = () => {
       type: "commercial",
       icon: <FaBuilding />
     },
-    // Add more services...
+    {
+      id: 3,
+      title: "Renovation Services",
+      description: "Transforming existing spaces into modern, functional areas.",
+      details: [
+        "Kitchen remodeling",
+        "Bathroom renovations",
+        "Whole-house makeovers",
+        "Structural upgrades"
+      ],
+      type: "renovation",
+      icon: <FaTools />
+    },
+    {
+      id: 4,
+      title: "Civil Works",
+      description: "Infrastructure and public works construction services.",
+      details: [
+        "Road construction",
+        "Bridge building",
+        "Drainage systems",
+        "Public utilities"
+      ],
+      type: "civil",
+      icon: <FaRoad />
+    }
   ];
 
   const serviceTypes = [
@@ -111,7 +138,7 @@ const ServicesPage = () => {
         </Row>
 
         <div className="text-center mt-5">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" onClick={() => navigate('/contact')}>
             Get a Free Quote
           </Button>
         </div>
