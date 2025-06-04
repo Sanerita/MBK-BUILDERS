@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Container, Button, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import ProjectGallery from '../components/ProjectGallery';
 import SectionHeader from '../components/SectionHeader';
@@ -33,52 +33,9 @@ const ProjectsContainer = styled.div`
 const ProjectsPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
+  const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
   
-  // Sample projects data - in a real app you might fetch this from an API
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      title: "Butterworth Residential Complex",
-      type: "Residential",
-      size: "2,400 sqm",
-      duration: "8 months",
-      images: ["/images/project1.jpg"],
-      description: "12-unit residential complex with modern amenities",
-      category: "residential"
-    },
-    {
-      id: 2,
-      title: "East London Office Park",
-      type: "Commercial",
-      size: "5,200 sqm",
-      duration: "12 months",
-      images: ["/images/project2.jpg"],
-      description: "Modern office space development",
-      category: "commercial"
-    },
-    {
-      id: 3,
-      title: "Mthatha Municipal Building",
-      type: "Municipal",
-      size: "3,800 sqm",
-      duration: "10 months",
-      images: ["/images/project3.jpg"],
-      description: "Government administration building",
-      category: "municipal"
-    },
-    {
-      id: 4,
-      title: "Port Alfred Luxury Villas",
-      type: "Residential",
-      size: "1,800 sqm",
-      duration: "6 months",
-      images: ["/images/project4.jpg"],
-      description: "Beachfront luxury villa development",
-      category: "residential"
-    }
-  ]);
-
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'residential', label: 'Residential' },
@@ -86,7 +43,6 @@ const ProjectsPage = () => {
     { id: 'municipal', label: 'Municipal' }
   ];
 
-  // Read filter from URL on initial load
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const filterParam = params.get('filter');
@@ -94,20 +50,58 @@ const ProjectsPage = () => {
       setActiveFilter(filterParam);
     }
 
-    // Simulate loading data from API
     const fetchProjects = async () => {
       setIsLoading(true);
       try {
-        // In a real app, you would fetch from your API here
-        // const response = await fetch('/api/projects');
-        // const data = await response.json();
-        // setProjects(data);
+        // Simulated data - replace with actual API call
+        const simulatedData = [
+          {
+            id: 1,
+            title: "Butterworth Residential Complex",
+            type: "Residential",
+            size: "2,400 sqm",
+            duration: "8 months",
+            images: ["/images/project1.jpg"],
+            description: "12-unit residential complex with modern amenities",
+            category: "residential"
+          },
+          {
+            id: 2,
+            title: "East London Office Park",
+            type: "Commercial",
+            size: "5,200 sqm",
+            duration: "12 months",
+            images: ["/images/project2.jpg"],
+            description: "Modern office space development",
+            category: "commercial"
+          },
+          {
+            id: 3,
+            title: "Mthatha Municipal Building",
+            type: "Municipal",
+            size: "3,800 sqm",
+            duration: "10 months",
+            images: ["/images/project3.jpg"],
+            description: "Government administration building",
+            category: "municipal"
+          },
+          {
+            id: 4,
+            title: "Port Alfred Luxury Villas",
+            type: "Residential",
+            size: "1,800 sqm",
+            duration: "6 months",
+            images: ["/images/project4.jpg"],
+            description: "Beachfront luxury villa development",
+            category: "residential"
+          }
+        ];
         
-        // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 500));
-        setIsLoading(false);
+        setProjects(simulatedData);
       } catch (error) {
         console.error('Error fetching projects:', error);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -121,7 +115,6 @@ const ProjectsPage = () => {
 
   const handleFilterClick = (categoryId) => {
     setActiveFilter(categoryId);
-    // Update the URL without causing a page reload
     window.history.pushState(null, '', `?filter=${categoryId}`);
   };
 

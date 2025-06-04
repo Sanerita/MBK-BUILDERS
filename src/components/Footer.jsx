@@ -130,7 +130,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <FontAwesomeIcon icon={faEnvelope} />
-              <span>angambuwako@icloud.com</span>
+              <span>angambuwako@mbkbuilders.co.za</span>
             </div>
             <div className="contact-item">
               <FontAwesomeIcon icon={faClock} />

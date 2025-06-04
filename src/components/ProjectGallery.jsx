@@ -21,7 +21,7 @@ const GalleryContainer = styled.div`
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
     height: 250px;
-    background: #f5f5f5; /* Placeholder color */
+    background: #f5f5f5;
   }
   
   .project-image {
@@ -51,38 +51,50 @@ const GalleryContainer = styled.div`
   }
 `;
 
+const ProjectItem = ({ project }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '50px 0px',
+  });
+
+  return (
+    <Col md={6} lg={4} className="project-item">
+      <div ref={ref} className="project-image-container">
+        {inView && (
+          <img
+            src={project.images[0]}
+            alt={project.title}
+            className="project-image"
+            loading="lazy"
+          />
+        )}
+      </div>
+      <h3 className="project-title">{project.title}</h3>
+      <div className="project-meta">
+        <span>{project.type}</span>
+        <span>{project.size}</span>
+        <span>{project.duration}</span>
+      </div>
+    </Col>
+  );
+};
+
 const ProjectGallery = ({ projects }) => {
+  if (!projects || projects.length === 0) {
+    return (
+      <div className="text-center py-5">
+        <p>No projects to display.</p>
+      </div>
+    );
+  }
+
   return (
     <GalleryContainer>
       <Row>
-        {projects.map((project) => {
-          const [ref, inView] = useInView({
-            triggerOnce: true,
-            threshold: 0.1,
-            rootMargin: '50px 0px',
-          });
-
-          return (
-            <Col key={project.id} md={6} lg={4} className="project-item">
-              <div ref={ref} className="project-image-container">
-                {inView && (
-                  <img
-                    src={project.images[0]}
-                    alt={project.title}
-                    className="project-image"
-                    loading="lazy"
-                  />
-                )}
-              </div>
-              <h3 className="project-title">{project.title}</h3>
-              <div className="project-meta">
-                <span>{project.type}</span>
-                <span>{project.size}</span>
-                <span>{project.duration}</span>
-              </div>
-            </Col>
-          );
-        })}
+        {projects.map((project) => (
+          <ProjectItem key={project.id} project={project} />
+        ))}
       </Row>
     </GalleryContainer>
   );

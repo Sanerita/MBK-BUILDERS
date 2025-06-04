@@ -6,7 +6,9 @@ import PageHeader from '../components/PageHeader';
 
 const StyledContact = styled.div`
   background-color: ${props => props.theme.colors.secondary};
-  padding: 4rem 0;
+  padding-top: 6rem;  /* Increased top padding to account for navbar */
+  padding-bottom: 4rem;
+  min-height: 100vh;
   
   .contact-info {
     background: ${props => props.theme.colors.primary};
@@ -88,10 +90,10 @@ const ContactPage = () => {
     
     try {
       await emailjs.send(
-        'service_your_service_id', // Replace with your EmailJS service ID
-        'template_your_template_id', // Replace with your EmailJS template ID
+        'service_your_service_id',
+        'template_your_template_id',
         formData,
-        'your_user_id' // Replace with your EmailJS user ID
+        'your_user_id'
       );
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -127,7 +129,7 @@ const ContactPage = () => {
               
               <div className="contact-item">
                 <i className="fas fa-envelope"></i>
-                <span>angambuwako@icloud.com</span>
+                <span>angambuwako@mbkbuilders.co.za</span>
               </div>
               
               <div className="contact-item">
