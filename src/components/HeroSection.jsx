@@ -7,7 +7,7 @@ const HeroContainer = styled.div`
               url(${props => props.$bgImage});
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -15,6 +15,13 @@ const HeroContainer = styled.div`
   color: white;
   text-align: center;
   padding: 4rem 0;
+
+  /* Mobile-first approach for background attachment */
+  background-attachment: scroll;
+  
+  @media (min-width: 768px) {
+    background-attachment: fixed;
+  }
 
   &::before {
     content: '';
@@ -36,37 +43,53 @@ const HeroContainer = styled.div`
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.2rem; /* Smaller default for mobile */
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
     
-    @media (max-width: 768px) {
-      font-size: 2.2rem;
+    @media (min-width: 768px) {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
     }
   }
 
   .lead {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1.2rem; /* Smaller default for mobile */
+    margin-bottom: 1.5rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.4;
     
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
     }
   }
 
   .btn {
-    padding: 0.75rem 2rem;
-    font-size: 1.1rem;
+    padding: 0.6rem 1.5rem; /* Smaller button on mobile */
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 50px;
     transition: all 0.3s ease;
+    
+    @media (min-width: 768px) {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+    }
     
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
+  }
+
+  /* Adjust height for mobile */
+  @media (max-width: 576px) {
+    min-height: 70vh;
+    padding: 3rem 0;
+    background-position: 60% center; /* Better image cropping on mobile */
   }
 `;
 
