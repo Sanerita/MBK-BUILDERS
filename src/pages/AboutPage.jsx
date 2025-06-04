@@ -7,7 +7,8 @@ import { FaHardHat, FaUsers, FaShieldAlt, FaLightbulb } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const AboutContainer = styled.div`
-  padding: 5rem 0;
+  padding-top: 7rem;  /* Increased top padding to account for navbar */
+  padding-bottom: 5rem;
   background-color: #f9f9f9;
   
   .styled-list {

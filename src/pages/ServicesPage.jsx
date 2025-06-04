@@ -7,7 +7,9 @@ import SectionHeader from "../components/SectionHeader";
 import { useNavigate } from 'react-router-dom';
 
 const ServicesContainer = styled.div`
-  padding: 5rem 0;
+  padding-top: 7rem;  /* Increased top padding to account for navbar */
+  padding-bottom: 5rem;
+  min-height: 100vh;
   
   .filter-btn {
     margin: 0 0.5rem 1rem;

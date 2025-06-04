@@ -6,8 +6,10 @@ import SectionHeader from '../components/SectionHeader';
 import { useNavigate } from 'react-router-dom';
 
 const ProjectsContainer = styled.div`
-  padding: 5rem 0;
+  padding-top: 7rem;  /* Increased top padding to account for navbar */
+  padding-bottom: 5rem;
   background-color: #f8f9fa;
+  min-height: 100vh;
   
   .filter-btn {
     margin: 0 0.5rem 0.5rem;
